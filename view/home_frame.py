@@ -1,6 +1,6 @@
 from tkinter import *
 from view import view_constants as vc
-from util.multiline_label import MultilineLabel
+from util.view.multiline_label import MultilineLabel
 
 
 class HomeFrame(Frame):

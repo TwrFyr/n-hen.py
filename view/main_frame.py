@@ -3,7 +3,7 @@ from tkinter import *
 from view.download_frame import DownloadFrame
 from view.home_frame import HomeFrame
 from view.favorites_frame import FavoritesFrame
-from view.settings_frame import SettingsFrame
+from view.settings.settings_frame import SettingsFrame
 
 MENU_WIDTH = 75
 
