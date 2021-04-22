@@ -57,9 +57,11 @@ def save_files_to_dir(file_url_list: List[str], path: str, update=None, thread_c
         threads = []
         for i in range(thread_count):
             slices = slice_array(file_url_list, thread_count)
-            t = threading.Thread(target=download_images, kwargs=dict(lock=lock, file_url_list=slices[i], path=path,
-                                                                     progress=progress),
-                                 daemon=True)
+            t = threading.Thread(target=download_images, daemon=True, kwargs=dict(
+                lock=lock,
+                file_url_list=slices[i],
+                path=path,
+                progress=progress))
             threads.append(t)
             t.start()
         for t in threads:

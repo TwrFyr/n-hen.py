@@ -184,11 +184,12 @@ def onChoose(favorites_frame: FavoritesFrame):
 
 def onDownload(favorites_frame: FavoritesFrame):
     if favorites_frame.n_user is not None:
-        t = threading.Thread(target=n_download_util.download_all_favorites, kwargs=dict(n_user=favorites_frame.n_user,
-                                                                                        base_dir=favorites_frame.entry_directory_value.get(),
-                                                                                        update_entry=favorites_frame.updateEntryProgress,
-                                                                                        update_page=favorites_frame.updatePageProgress,
-                                                                                        thread_count=16))
+        t = threading.Thread(target=n_download_util.download_all_favorites, kwargs=dict(
+            n_user=favorites_frame.n_user,
+            base_dir=favorites_frame.entry_directory_value.get(),
+            update_entry=favorites_frame.updateEntryProgress,
+            update_page=favorites_frame.updatePageProgress,
+            thread_count=16))
         t.start()
     else:
         print('no n_user found')
