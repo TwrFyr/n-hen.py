@@ -14,13 +14,11 @@ class ParameterSettingsFrame(Frame):
         row_pady = 1
         title_max_length = 20
 
-        # self.configure(background='red')
-
         self.label_name = Label(master=self, text='', width=title_max_length, anchor='w')
         self.label_name.grid(row=0, column=0, padx=row_padx, pady=row_pady)
 
         self.entry_path_value = StringVar()
-        self.entry_path = Entry(master=self)
+        self.entry_path = Entry(master=self, textvariable=self.entry_path_value)
         self.entry_path.grid(row=0, column=1, sticky='we', padx=row_padx, pady=row_pady)
 
         self.btn_reset = Button(master=self, text='Reset')
@@ -38,6 +36,7 @@ class ParameterSettingsFrame(Frame):
 
     def setValue(self, value: str):
         self.entry_path_value.set(value)
+        self.entry_path.update_idletasks()
 
     def getValue(self) -> str:
         return self.entry_path_value.get()

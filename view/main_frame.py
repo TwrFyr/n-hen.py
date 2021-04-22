@@ -74,6 +74,7 @@ class MainFrame(Tk):
         self.download_frame.pack_forget()
         self.favorites_frame.pack_forget()
         self.settings_frame.pack_forget()
+        self.settings_frame.onHide()
 
         if destination == Navigation.HOME:
             self.home_frame.pack(fill=X)
@@ -82,4 +83,5 @@ class MainFrame(Tk):
         elif destination == Navigation.FAVORITES:
             self.favorites_frame.pack(fill=X)
         elif destination == Navigation.SETTINGS:
+            self.settings_frame.onDisplay()
             self.settings_frame.pack(fill=X)
