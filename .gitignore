@@ -131,3 +131,4 @@ dmypy.json
 # Data storage files
 /saves
 /favorites
+settings.json
