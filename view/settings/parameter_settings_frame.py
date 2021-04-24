@@ -1,4 +1,5 @@
 from tkinter import *
+from typing import Optional
 
 
 class ParameterSettingsFrame(Frame):
@@ -17,11 +18,12 @@ class ParameterSettingsFrame(Frame):
         self.label_name = Label(master=self, text='', width=title_max_length, anchor='w')
         self.label_name.grid(row=0, column=0, padx=row_padx, pady=row_pady)
 
+        self.default_value = None
         self.entry_path_value = StringVar()
         self.entry_path = Entry(master=self, textvariable=self.entry_path_value)
         self.entry_path.grid(row=0, column=1, sticky='we', padx=row_padx, pady=row_pady)
 
-        self.btn_reset = Button(master=self, text='Reset')
+        self.btn_reset = Button(master=self, text='Reset', command=self.onReset)
         self.btn_reset.grid(row=0, column=2, padx=row_padx, pady=row_pady)
 
         self.grid_columnconfigure(1, weight=1)
@@ -40,6 +42,9 @@ class ParameterSettingsFrame(Frame):
 
     def getValue(self) -> str:
         return self.entry_path_value.get()
+
+    def setDefault(self, default: Optional[str]):
+        self.default_value = default
 
     def checkValidation(self) -> bool:
         return self.validate_func is None or self.validate_func(self.entry_path_value.get())
@@ -62,3 +67,7 @@ class ParameterSettingsFrame(Frame):
                 self.entry_path.config(state=DISABLED)
                 self.btn_reset.config(state=DISABLED)
         self.activated = activated
+
+    def onReset(self):
+        if self.default_value is not None:
+            self.setValue(self.default_value)

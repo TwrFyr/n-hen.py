@@ -21,20 +21,26 @@ class SettingsFrame(Frame):
         temp_frame = Frame(master=self)
         temp_frame.pack(fill=X)
 
+        default_settings = getDefaultSettings()
+
         self.download_directory = DirectorySettingsFrame(master=temp_frame)
         self.download_directory.setTitle('download directory')
+        self.download_directory.setDefault(default_settings.directory_paths.downloads)
         self.download_directory.pack(fill=X, expand=1)
 
         self.favorites_directory = DirectorySettingsFrame(master=temp_frame)
         self.favorites_directory.setTitle('favorites directory')
+        self.favorites_directory.setDefault(default_settings.directory_paths.favorites)
         self.favorites_directory.pack(fill=X, expand=1)
 
         self.thread_count = ParameterSettingsFrame(master=temp_frame)
         self.thread_count.setTitle('thread count')
+        self.thread_count.setDefault(str(default_settings.thread_count))
         self.thread_count.pack(fill=X, expand=1)
 
         self.favorite_download_timeout = ParameterSettingsFrame(master=temp_frame)
         self.favorite_download_timeout.setTitle('download timeout')
+        self.favorite_download_timeout.setDefault(str(default_settings.download_delay))
         self.favorite_download_timeout.pack(fill=X, expand=1)
 
         # control buttons
