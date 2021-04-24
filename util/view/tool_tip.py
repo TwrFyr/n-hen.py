@@ -21,9 +21,9 @@ class CreateToolTip(object):
     create a tooltip for a given widget
     """
 
-    def __init__(self, widget, text='widget info'):
-        self.waittime = 500  # miliseconds
-        self.wraplength = 180  # pixels
+    def __init__(self, widget, text=None):
+        self.waittime = 750  # miliseconds
+        self.wraplength = 300  # pixels
         self.widget = widget
         self.text = text
         self.widget.bind("<Enter>", self.enter)
@@ -33,11 +33,13 @@ class CreateToolTip(object):
         self.tw = None
 
     def enter(self, event=None):
-        self.schedule()
+        if self.text is not None:
+            self.schedule()
 
     def leave(self, event=None):
-        self.unschedule()
-        self.hidetip()
+        if self.text is not None:
+            self.unschedule()
+            self.hidetip()
 
     def schedule(self):
         self.unschedule()

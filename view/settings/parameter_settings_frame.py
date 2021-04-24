@@ -1,6 +1,8 @@
 from tkinter import *
 from typing import Optional
 
+from util.view.tool_tip import CreateToolTip
+
 
 class ParameterSettingsFrame(Frame):
     """
@@ -17,6 +19,7 @@ class ParameterSettingsFrame(Frame):
 
         self.label_name = Label(master=self, text='', width=title_max_length, anchor='w')
         self.label_name.grid(row=0, column=0, padx=row_padx, pady=row_pady)
+        self.tooltip_label_name = CreateToolTip(widget=self.label_name, text=None)
 
         self.default_value = None
         self.entry_path_value = StringVar()
@@ -35,6 +38,9 @@ class ParameterSettingsFrame(Frame):
 
     def setTitle(self, title: str):
         self.label_name.configure(text=title)
+
+    def setTitleToolTip(self, tooltip: str):
+        self.tooltip_label_name.text = tooltip
 
     def setValue(self, value: str):
         self.entry_path_value.set(value)
