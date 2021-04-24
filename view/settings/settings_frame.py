@@ -23,6 +23,8 @@ class SettingsFrame(Frame):
 
         default_settings = getDefaultSettings()
 
+        self.saved_settings = None
+
         self.download_directory = DirectorySettingsFrame(master=temp_frame)
         self.download_directory.setTitle('download directory')
         self.download_directory.setDefault(default_settings.directory_paths.downloads)
@@ -97,8 +99,11 @@ def onEdit(settings_frame: SettingsFrame):
         settings_frame.toggleBtnApply(False)
         settings_frame.toggleBtnResetAll(False)
         settings_frame.setEditable(False)
+        _setCurrentSettings(settings_frame, settings_frame.saved_settings)
+        settings_frame.saved_settings = None
     else:
         print('edit')
+        settings_frame.saved_settings = _getCurrentSettings(settings_frame)
         settings_frame.btn_edit.configure(text='Cancel')
         settings_frame.toggleBtnApply(True)
         settings_frame.toggleBtnResetAll(True)
@@ -114,6 +119,7 @@ def onApply(settings_frame: SettingsFrame):
     settings_frame.setEditable(False)
     settings_frame.isEditing = not settings_frame.isEditing
     exportToFile(_getCurrentSettings(settings_frame), 'settings.json')
+    settings_frame.saved_settings = None
 
 
 def _getCurrentSettings(settings_frame: SettingsFrame) -> SettingsParameters:
